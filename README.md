@@ -17,3 +17,11 @@ Polyglot **TypeScript/Node.js + Python** reference orchestrator for multi-hour, 
 npm install && npm run build && npm test
 python3 -m unittest discover -s python_worker -p "test_*.py" -v
 ```
+
+## Multi-Turn Agent Chat Runtime & Trajectory Regression Evals
+
+`python_worker/agent_chat_systems.py` provides production-grade multi-turn chat orchestration:
+- **ConversationStateManager**: Multi-turn conversation state tracking with automatic sliding window token pruning, message compaction, and lossless JSON serialization/hydration.
+- **MultiTurnAgentOrchestrator**: Autonomous agent execution loop supporting tool-calling schema validation, parameter sandboxing, cyclic execution detection, and circuit breaking on consecutive downstream timeouts.
+- **TrajectoryRegressionEvaluator**: Evaluation harness computing groundedness scores against reference documents and Goal Completion Rate (GCR) metrics across non-deterministic trajectories.
+- **LangfuseObservabilityBridge**: OpenTelemetry/Langfuse compatible tracing capturing span-level latency, token attribution, and cost metrics for enterprise agent fleets.
