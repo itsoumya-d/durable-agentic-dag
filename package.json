@@ -1,9 +1,10 @@
 {
   "name": "durable-agentic-dag",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Polyglot TypeScript + Python durable workflow orchestrator with static Zod DAG validation, Restate-style checkpoint/resume execution, OpenTelemetry token-spend attribution, and biomedical citation provenance guards.",
   "type": "module",
   "scripts": {
+    "lint": "tsc --noEmit",
     "build": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts"
   },
