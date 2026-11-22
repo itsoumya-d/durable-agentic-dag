@@ -55,3 +55,13 @@ python3 -m unittest discover -s python_worker -p "test_*.py" -v
 • ERPPolicyRuleEngine: Enforces deterministic enterprise compliance, vendor verification, dual authorization on transactions exceeding thresholds, and currency invariants.
 • EnterpriseAgentRuntime: Multi-agent coordination runtime with tool execution, idempotency key generation, and execution trace recording.
 • Idempotency & Audit Traceability: Guarantees zero duplicate disbursements or tool dispatches across transient failures, storing full trace capture for enterprise audit.
+
+
+### Fintech Model Context Protocol (MCP) Server & Policy Engine
+
+`durable-agentic-dag` provides a standards-compliant Model Context Protocol (MCP) server for conversational enterprise workflows:
+- **`query_sme_transactions`**: Filter SME card transactions with category and amount constraints.
+- **`triage_cardholder_dispute`**: Classify chargeback risk with confidence scores and automated provisional credit routing.
+- **`evaluate_credit_policy_guardrail`**: Enforce risk-tiered credit caps pre-execution.
+- **`escalate_case_to_ops`**: SLA-aware case routing with execution trace forwarding.
+- **Resources**: `fintech://playbooks/sme_spend_policy` and `fintech://metrics/active_automations`.
