@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { validateDagOrThrow, type WorkflowStep } from "../src/dagValidator.js";
 
 test("Failure injection: rejects steps with cyclic dependencies and malformed JSON schemas", () => {
-  const cyclicSteps: WorkflowStep[] = [
+  const cyclicSteps: any[] = [
     { id: "step-1", dependsOn: ["step-2"], type: "llm", prompt: "A" },
     { id: "step-2", dependsOn: ["step-1"], type: "deterministic", execute: async () => ({}) },
   ];

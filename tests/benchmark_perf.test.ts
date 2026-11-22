@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { validateDagOrThrow, type WorkflowStep } from "../src/dagValidator.js";
 
 test("Benchmark: validates 100-step linear DAG in under 20ms (p95 < 5ms per 20 steps)", () => {
-  const steps: WorkflowStep[] = [];
+  const steps: any[] = [];
   for (let i = 0; i < 100; i++) {
     steps.push({
       id: `step-${i}`,

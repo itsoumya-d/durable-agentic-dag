@@ -35,3 +35,14 @@ python3 -m unittest discover -s python_worker -p "test_*.py" -v
 - **BM25KeywordIndex**: Term-frequency inverted index implementing Okapi BM25 scoring with document length normalization.
 - **HybridRRFRetriever**: Reciprocal Rank Fusion (RRF) combining dense and lexical rankings with configurable constant $k=60$.
 - **RAGPipelineGuardrail**: Verifies extracted citation spans against retrieved context chunks, enforcing minimum lexical overlap thresholds and rejecting ungrounded claims.
+
+
+## Multi-PSP Payment Ingestion & Reconciliation Pipeline
+
+ provides an enterprise payment ingestion, multi-gateway reconciliation, and analytical warehouse pipeline:
+
+• PaymentReconciliationPipeline: Ingests divergent raw payment webhooks across Stripe, Adyen, and Checkout.com, normalizing into a canonical schema.
+• HMAC PII Masking: Anonymizes customer identifiers and emails via HMAC-SHA256 with configurable salt for GDPR and financial compliance.
+• 3-Way Settlement Reconciliation: Automates matching between transaction authorizations, captures, and external bank/gateway settlement statements, isolating fee variances and unallocated balances.
+• Dimensional Modeling: Projects transactional records into dimensional star schemas (facts and dimensions) for high-performance reporting.
+• Data Quality Assertion Gates: Validates financial contract invariants and flags ledger drift.

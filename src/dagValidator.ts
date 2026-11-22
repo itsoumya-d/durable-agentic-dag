@@ -99,3 +99,58 @@ export function validateWorkflowDag(raw: unknown): Result<WorkflowStep[], string
 
   return ok(ordered);
 }
+
+
+export function validateDagOrThrow(raw: unknown): WorkflowStep[] {
+  let steps: any[];
+  if (Array.isArray(raw)) {
+    steps = raw;
+  } else if (raw && typeof raw === 'object' && 'steps' in raw && Array.isArray((raw as any).steps)) {
+    steps = (raw as any).steps;
+  } else {
+    throw new Error('Invalid workflow definition');
+  }
+
+  const byId = new Map<string, any>();
+  const inDegree = new Map<string, number>();
+  const children = new Map<string, string[]>();
+
+  for (const s of steps) {
+    if (!s.id) throw new Error('Step missing id');
+    byId.set(s.id, s);
+    inDegree.set(s.id, 0);
+    children.set(s.id, []);
+  }
+
+  for (const s of steps) {
+    for (const dep of s.dependsOn ?? []) {
+      if (!byId.has(dep)) {
+        throw new Error(`Dangling dependency: ${dep}`);
+      }
+      inDegree.set(s.id, (inDegree.get(s.id) ?? 0) + 1);
+      children.get(dep)!.push(s.id);
+    }
+  }
+
+  const queue: string[] = [];
+  for (const [id, deg] of inDegree) {
+    if (deg === 0) queue.push(id);
+  }
+
+  const ordered: any[] = [];
+  while (queue.length > 0) {
+    const id = queue.shift()!;
+    ordered.push(byId.get(id));
+    for (const childId of children.get(id) ?? []) {
+      const next = (inDegree.get(childId) ?? 1) - 1;
+      inDegree.set(childId, next);
+      if (next === 0) queue.push(childId);
+    }
+  }
+
+  if (ordered.length !== steps.length) {
+    throw new Error('Cycle detected in DAG dependencies');
+  }
+
+  return ordered;
+}
