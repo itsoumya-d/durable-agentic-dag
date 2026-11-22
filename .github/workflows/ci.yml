@@ -41,7 +41,7 @@ jobs:
       - name: Run Python unit tests
         run: python -m unittest discover -s python_worker -p "test_*.py" -v
       - name: Smoke test semantic search engine import
-        run: python -c "from python_worker.semantic_search_engine import SemanticChunker, DenseEmbeddingIndex; print('Smoke test OK')"
+        run: python -c "from python_worker.semantic_search_engine import SemanticChunker, DenseEmbeddingIndex; from python_worker.fintech_mcp_server import FintechMCPServer; s = FintechMCPServer(); assert len(s.list_tools()) == 4; print('Smoke test OK')"
 
   security-scan:
     name: Security & Secret Scan
