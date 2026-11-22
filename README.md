@@ -46,3 +46,12 @@ python3 -m unittest discover -s python_worker -p "test_*.py" -v
 • 3-Way Settlement Reconciliation: Automates matching between transaction authorizations, captures, and external bank/gateway settlement statements, isolating fee variances and unallocated balances.
 • Dimensional Modeling: Projects transactional records into dimensional star schemas (facts and dimensions) for high-performance reporting.
 • Data Quality Assertion Gates: Validates financial contract invariants and flags ledger drift.
+
+
+## Enterprise Multi-Agent Coordination & ERP Policy Rule Engine
+
+`python_worker/enterprise_agent_runtime.py` provides production-grade orchestration and policy enforcement for enterprise ERP workflows:
+
+• ERPPolicyRuleEngine: Enforces deterministic enterprise compliance, vendor verification, dual authorization on transactions exceeding thresholds, and currency invariants.
+• EnterpriseAgentRuntime: Multi-agent coordination runtime with tool execution, idempotency key generation, and execution trace recording.
+• Idempotency & Audit Traceability: Guarantees zero duplicate disbursements or tool dispatches across transient failures, storing full trace capture for enterprise audit.
